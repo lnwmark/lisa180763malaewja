@@ -18,6 +18,8 @@ def q09():
     data = response.json()
     df = json_normalize(data)
     df2 = json_normalize(df.products[0])
+    #print(df2[['id', 'title', 'category']])
+    #print(df2.columns)
     # print(df2[['brand']])
     df2['brand'] = df2['brand'].str.upper()
 
