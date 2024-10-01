@@ -1,0 +1,30 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+#Horizontal Bar chart
+#File name (q02.png)
+#Instruction:
+#Display Mastercard transaction amounts by shipping state
+
+
+def q02():
+    path = 'C:\\Users\\ACER\\Downloads\\transactions.csv'
+    df = pd.read_csv(path)
+
+    df1 =df[df['shippingCountry'].notnull()]
+    df2 =df1.query("cardType in ('MC')")
+    df3 =df2.query("shippingCountry in ('US')")
+    df3['shippingState'] = df3['shippingState'].str.upper()
+    df4 =df3.groupby('shippingState')['transactionAmountUSD'].sum()
+
+    df5 = df4.index.tolist()
+    df6 = df4.values.tolist()
+
+    plt.figure(figsize=(6.4, 16.4))  # Adjust the size if needed
+    plt.barh(df5, df6)
+    plt.xlabel('Mastercard transaction amounts ')
+    plt.ylabel('shiping state')
+    plt.title('Display Mastercard transaction amounts by shipping state')
+
+    plt.show()
